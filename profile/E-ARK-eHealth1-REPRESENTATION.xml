@@ -339,6 +339,7 @@
             </requirement>
             <requirement ID="EH16" REQLEVEL="MAY" EXAMPLES="fileSecExample1">
                 <description>
+                <!--example does not show attribute in use-->
                     <head>Reference to Patient Document administrative metadata</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">If administrative metadata has been provided at a representation level (i.e. there is rights and/or digital provenance metadata that is specific  to the patient data) then this attribute refers to the (`&lt;amdSec&gt;`) of the representation mets.xml by ID.</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
@@ -350,6 +351,7 @@
             </requirement>         
             <requirement ID="EH17" REQLEVEL="MUST" RELATEDMAT="VocabularyContentInformationTypeSpecification" EXAMPLES="fileSecExample1">
                 <description>
+                <!--Example does not contain a fileGrp with the @USE attribute value 'Representations'-->
                     <head>Content Information Type Specification</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The value of the attribute the `mets/fileSec/fileGrp/@csip:CONTENTINFORMATIONTYPE` is set to "citsehpj_v1_0".</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
@@ -383,6 +385,7 @@
                 </description>
             </requirement>
             <requirement ID="EH20" REQLEVEL="MAY" EXAMPLES="fileSecExample2">
+            <!--Example does not show attribute in use-->
                 <description>
                     <head>File reference to the descriptive metadata</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">If descriptive metadata has been provided per file, this attribute refers to the file's descriptive metadata by ID.</p>
@@ -425,6 +428,7 @@
             </requirement>
             <requirement ID="EH24" REQLEVEL="MAY" EXAMPLES="fileSecExample2">
                 <description>
+                <!--Example does not show attribute in use-->
                     <head>Component byte stream original identification</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">If an identifier for the byte stream was supplied by the owner, it can be recorded in this attribute.</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
@@ -595,6 +599,7 @@
             </requirement>
             <requirement ID="EH39" REQLEVEL="SHOULD" EXAMPLES="structMapExample2">
                 <description>
+                <!--Example does not show documentation struct in use, applies to all reqs through eh43-->
                     <head>Documentation division</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The documentation referenced in the file section file groups is described in the structural map with one sub division.</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">

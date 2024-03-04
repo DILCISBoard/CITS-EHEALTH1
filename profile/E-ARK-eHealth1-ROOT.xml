@@ -164,7 +164,7 @@
                     <p xmlns="http://www.w3.org/1999/xhtml">For example, the submission agreement developed by Docuteam GmbH <a href="http://www.loc.gov/standards/mets/profiles/00000041.xml">http://www.loc.gov/standards/mets/profiles/00000041.xml</a></p>
                     <p xmlns="http://www.w3.org/1999/xhtml">A reference code for the Submission Agreement MAY be included with @TYPE used with the value “REFERENCECODE”</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/altRecordID[@TYPE='SUBMISSIONAGREEMENT']</dd>
+                        <dt>METS XPath</dt><dd>mets/metsHdr/altRecordID[@TYPE='SUBMISSIONAGREEMENT']</dd>
                         <dt>Cardinality</dt><dd>0..1</dd>
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP5</dd>
                     </dl>
@@ -176,8 +176,9 @@
                     <p xmlns="http://www.w3.org/1999/xhtml">A wrapper element that encapsulates the name of the organisation, software and person that originally created the data being transferred. Please note that this might be different from the organisation which has been charged with preparing and sending the SIP to the archives.</p>
                     <p xmlns="http://www.w3.org/1999/xhtml">It MUST be easy to positively identify the creating organisation (healthcare provider) without which the data has no provenance.</p>
                         <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/agent</dd>
+                        <dt>METS XPath</dt><dd>mets/metsHdr/agent</dd>
                         <dt>Cardinality</dt><dd>1..1</dd>
+                        <!--Surely this must be 1..n-->
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP9</dd>
                     </dl>
                 </description>
@@ -187,7 +188,7 @@
                     <head>Archival creator agent role</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The role of the archvial creator organisation is set to the value "CREATOR".</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/agent[@ROLE='CREATOR']</dd>
+                        <dt>METS XPath</dt><dd>mets/metsHdr/agent[@ROLE='CREATOR']</dd>
                         <dt>Cardinality</dt><dd>1..1</dd>
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP10</dd>
                     </dl>
@@ -198,7 +199,11 @@
                     <head>Archival creator agent type</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The type of the archvial creator agent is set to the value "ORGANIZATION".</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/agent[@TYPE='ORGANIZATION']</dd>
+                        <!--This xpath does not necessarily have to refer to the same element addressed above, two seperate elements each with one 
+                        each of the attributes would fulfill both references but I suspect don't meet the spirit of the requirement. 
+                        agent[@ROLE='CREATOR' and @TYPE='ORGANIZATION']. It seems one requirement "An agent element with the role "CREATOR" and type "ORGANIZATION" describes the creator of the SIP"
+                        would be clearer. This xpath refers to many different agents without creator role when clearly it means to return only the creator agent.-->
+                        <dt>METS XPath</dt><dd>mets/metsHdr/agent[@TYPE='ORGANIZATION']</dd>
                         <dt>Cardinality</dt><dd>1..1</dd>
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP11</dd>
                     </dl>
@@ -210,7 +215,8 @@
                     <p xmlns="http://www.w3.org/1999/xhtml">The name of the organisation(s) that originally created the data being transferred MUST be given.</p>
                     <p xmlns="http://www.w3.org/1999/xhtml">Please note that this might be different from the organisation which has been charged with preparing and sending the SIP to the archives.</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/agent/name</dd>
+                    <!--the requirement text potentially suggests this path refers only to agents with a creator role, but it does not-->
+                        <dt>METS XPath</dt><dd>mets/metsHdr/agent/name</dd>
                         <dt>Cardinality</dt><dd>1..n</dd>
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP12</dd>
                     </dl>
@@ -222,7 +228,7 @@
                     <p xmlns="http://www.w3.org/1999/xhtml">The archival creator agent SHOULD have a note providing a unique identification code for the archival creator.</p>
                     <p xmlns="http://www.w3.org/1999/xhtml">As permitted by national identification systems for healthcare providers submitting Patient Medical Records, an identifier for the provider should be provided.</p>
                      <dl xmlns="http://www.w3.org/1999/xhtml">
-                         <dt>METS XPath</dt><dd>metsHdr/agent/note</dd>
+                         <dt>METS XPath</dt><dd>mets/metsHdr/agent/note</dd>
                         <dt>Cardinality</dt><dd>0..1</dd>
                          <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP13</dd>
                     </dl>
@@ -233,7 +239,7 @@
                     <head>Classification of the archival creator agent additional information</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The archival creator agent notetype has a value of "IDENTIFICATIONCODE".</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>metsHdr/agent/note/@csip:NOTETYPE</dd>
+                        <dt>METS XPath</dt><dd>mets/metsHdr/agent/note/@csip:NOTETYPE</dd>
                         <dt>Cardinality</dt><dd>1..1</dd>
                         <dt>REF:SIPv2.0.4</dt><dd>https://earksip.dilcis.eu/#SIP14</dd>
                     </dl>
@@ -355,6 +361,7 @@
                 </description>
             </requirement>       
             <requirement ID="EHR21" REQLEVEL="MAY" EXAMPLES="fileSecExample1">
+                <!--Example does not show attribute in use-->
                 <description>
                     <head>Reference to administrative metadata</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">If administrative metadata has been provided at file group  `mets/fileSec/fileGrp` level this attribute refers to its administrative metadata section by ID.</p>
@@ -371,7 +378,7 @@
                     <head>Content Information Type Specification</head>
                     <p xmlns="http://www.w3.org/1999/xhtml">The value of the attribute `mets/fileSec/fileGrp/@csip:CONTENTINFORMATIONTYPE` is set to "citsehpj_v1_0".</p>
                     <dl xmlns="http://www.w3.org/1999/xhtml">
-                        <dt>METS XPath</dt><dd>mets/fileSec/fileGrp[@csip:CONTENTINFORMATIONTYPE='citsehpj_v1_0 ']</dd>
+                        <dt>METS XPath</dt><dd>mets/fileSec/fileGrp[@csip:CONTENTINFORMATIONTYPE='citsehpj_v1_0']</dd>
                         <dt>Cardinality</dt><dd>1..1</dd>
                         <dt>REF:CSIPv2.0.4</dt><dd>https://earkcsip.dilcis.eu/#CSIP62</dd>
                     </dl>
