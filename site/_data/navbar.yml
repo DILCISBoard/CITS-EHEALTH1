@@ -21,6 +21,9 @@
 - title: "Examples"
   href: "/examples/"
 
+- title: "Archive"
+  href: "/archive/"
+
 - title: "About"
   href: "/"
   subcategories:
