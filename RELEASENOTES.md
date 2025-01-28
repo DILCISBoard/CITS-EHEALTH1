@@ -24,7 +24,7 @@ Standard changes between versions, e.g. version number and release date.
 
 Version 2.0.1
 -------------
-xxx xxth 2024
+December 23rd, 2024
 
 ### Major
 No changes
