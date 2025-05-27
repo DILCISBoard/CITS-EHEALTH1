@@ -22,6 +22,38 @@ to change the meaning of the specification.
 ### Administrative:
 Standard changes between versions, e.g. version number and release date.
 
+Version 2.0.2
+-------------
+October xx, 2025
+
+### Major
+No changes
+
+### Minor
+- Version 2.0.1
+-------------
+December 23rd, 2024
+
+### Major
+No changes
+
+### Minor
+- Cardinality of Creator Agent in mets Header element, issue #34
+- Requirement EH30 in the representation mets should be removed as deprecated, issue #36
+- Cardinality of EH59 in mets file is incorrect, issue #35
+- Improve legibility of package diagram in specification and guideline, issue #33
+
+### Corrections
+Minor spelling and grammar corrections where found or pointed out.
+
+### Administrative:
+
+
+### Corrections
+Minor spelling and grammar corrections where found or pointed out.
+
+### Administrative:
+
 Version 2.0.1
 -------------
 December 23rd, 2024
