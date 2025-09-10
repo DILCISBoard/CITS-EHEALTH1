@@ -1,6 +1,9 @@
+:doctype: book
+[chapter]
 = Implementation
 :figure-caption!:
 :sectnums:
+:imagesdir: figs
 
 == Use of METS in eHealth1
 
