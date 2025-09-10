@@ -1,3 +1,5 @@
+:doctype: book
+[chapter]
 = Postface
 :figure-caption!:
 :sectnums:
