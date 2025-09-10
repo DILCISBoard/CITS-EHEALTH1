@@ -1,6 +1,7 @@
 = Specification
 :figure-caption!:
 :sectnums:
+:imagesdir:figs
 
 == CITS eHealth1 Specification Requirements Structure
 
