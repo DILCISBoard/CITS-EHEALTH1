@@ -1,6 +1,9 @@
+:doctyoe: book
+[chapter]
 = Introduction
 :figure-caption!:
 :sectnums:
+:imagedir: /figs
 
 == Purpose
 
