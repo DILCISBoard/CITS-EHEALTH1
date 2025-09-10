@@ -1,3 +1,5 @@
+:doctype: book
+[chapter]
 = Glossary
 
 [cols="1,1"]
