@@ -1,7 +1,9 @@
+:doctype: bbok
+[chapter]
 = Specification
 :figure-caption!:
 :sectnums:
-:imagesdir:figs
+:imagesdir: figs
 
 == CITS eHealth1 Specification Requirements Structure
 
