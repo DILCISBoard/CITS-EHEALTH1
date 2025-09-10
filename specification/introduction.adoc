@@ -50,7 +50,7 @@ This specification is created based on the requirements of the Common Specificat
 The data model structure is based on a layered approach for information package definitions [Figure 2](#data-model-structure). The Common Specification for Information Packages (CSIP) forms the outermost layer. The general SIP, AIP and DIP specifications add respectively, submission, archiving and dissemination information to the CSIP specification. The third layer of the model represents specific content information type specifications, such as this CITS eHealth1 specification. Additional layers for business-specific specifications and local variant implementations of any specification can be added to suit the needs of the organisation.
 
 .Figure 2: Data Model Structure
-image::fig_2_data_model_structure.svg[] 
+image::{/figs}/fig_2_data_model_structure.svg[] 
 
 Every level in the data model structure inherits metadata entities and elements from the higher levels. In order to increase adoption, a flexible schema has been developed. This will allow for extension points where the schema in each layer can be extended to accommodate additional information on the next specific layer until, finally, the local implementation can add specific entities or metadata elements to satisfy specific local needs. Extension points can be implemented by:
 
