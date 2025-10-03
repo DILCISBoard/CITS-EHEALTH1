@@ -1,0 +1,5 @@
+= Representation METS header element (element metsHdr)
+
+There are no requirements for a specific header element in the representation METS. The eHealth1 representation metsHdr element should comply with the metsHdr requirements in the SIP profile.
+Note that the information contained in the representation header element relate specifically to the representation METS document.
+

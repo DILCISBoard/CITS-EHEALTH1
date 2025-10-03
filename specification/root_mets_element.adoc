@@ -1,0 +1,4 @@
+= Root METS root element
+
+The eHealth1 CITS specification does not change or extend any of the requirements for the Root METS root element. Information is given below regarding the specific content type attributes to be used in an eHealth1 CITS.
+
