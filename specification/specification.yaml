@@ -1,0 +1,135 @@
+---
+
+ tables:
+  - name: metadata-root-root-requirements
+    heading: "Root METS Root Element Requirements"
+    type: requirements
+    section: metsRootElement
+    examples: true
+    requirements:
+      - EHR1
+      - EHR2
+      - EHR3
+      - EHR4
+
+    - name: metadata-root-metshdr-requirements
+      heading: "Root METS Header Section (element metsHdr)"
+      type: requirements
+      section: metsRootElement
+      examples: true
+      requirements:
+      - EHR5
+      - EHR6
+      - EHR7
+      - EHR8
+      - EHR9
+      - EHR10
+      - EHR11
+
+    - name: metadata-root-dmdsec-requirements
+      heading: "Root METS Descriptive Metadata Section (element dmdSec)"
+      type: requirements
+      section: metsRootElement
+      examples: true
+      requirements:
+      - EHR12
+      - EHR13
+      - EHR14
+      - EHR15
+
+    - name: metadata-root-amdsec-requirements
+      heading: "Root METS File Metadata Section (element fileSec)"
+      type: requirements
+      section: metsRootElement
+      examples: true
+      requirements:
+      - EHR16
+      - EHR22
+
+     - name: metadata-root-structmap-requirements
+     heading: "Root METS Structmap Element"
+     type: requirements
+     section: metsRootElement
+     examples: true
+     requirements:
+      - REF_CSIP_80
+
+     - name: metadata-rep-root-requirements
+     heading: "Representation METS Root Element"
+     type: requirements
+     section: metsRepresentationElement
+     examples: true
+     requirements:
+      - EH1
+      - EH2
+      - EH3
+      - EH4
+      - EH5
+
+    - name: metadata-rep-filesec-requirements
+    heading: "Representation METS File Section (element fileSec)"
+    type: requirements
+    section: metsRepresentationElement
+    examples: true
+    requirements:
+      - EH13
+      - EH14
+      - EH15
+      - EH17
+      - EH22
+      - EH23
+      - EH24
+      - EH25
+      - EH26
+
+    - name: mets-rep-structmap-requirements
+      heading: "Representation METS Structural Map (element structMap)"
+      type: requirements
+      section: metsRepresentationElement
+      examples: true
+      requirements:
+      - EH28
+      - EH30
+      - EH31
+      - EH45
+      - EH46
+      - EH47
+      - EH70
+      - EH71
+      - EH72
+      - EH48
+      - EH50
+      - EH51
+      - EH52
+      - EH53
+      - EH73
+      - EH74
+      - EH59
+      - EH60
+      - EH61
+      - EH62
+      - EH63
+      - EH64
+      - EH75
+      - EH76
+
+appendices:
+  
+- name: mets.root.examples
+    heading: "E-ARK CITS eHealth1 Root METS Example"
+    label: "A"
+    type: mets
+    section: Appendix
+
+- name: mets.representation.examples
+    heading: "E-ARK CITS eHealth1 Representation METS Example"
+    label: "B"
+    type: mets
+    section: Appendix
+
+- name: mets.vocabs
+    heading: "External Vocabularies"
+    label: "C"
+    type: mets
+    section: vocabulary
+

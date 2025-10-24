@@ -1,0 +1,18 @@
+= Representation METS administrative metadata section (element amdSec)
+
+The administrative metadata section contains four sub-sections, each used to record different types of metadata for package content:
+
+* technical metadata (element techMD) records technical metadata;
+* rights metadata (element rightsMD) records intellectual property rights information;
+* source metadata (element sourceMD) records descriptive, technical or rights metadata for an analogue source for a digital library object; and
+* digital provenance metadata (element digiprovMD) records digital preservation information (e.g. audit information covering a digital library object’s life-cycle).
+
+The CSIP only describes the use of the elements digiprovMD and rightsMD within the administrative metadata section of the METS.
+
+The CSIP (and METS) categorises preservation metadata as administrative metadata, specifically Digital Provenance metadata (following the available guidelines published by the PREMIS EC guidelines:footnote:[http://www.loc.gov/standards/premis/guidelines2017-premismets.pdf]). Hence all preservation metadata should be referenced from a digiprovMD element within the amdSec.
+
+The METS amdSec element should include references to all relevant metadata located in the folder “repname/metadata/preservation”. The package level METS.xml file should only reference package level preservation metadata. Representation level METS.xml files should only reference representation level preservation metadata.
+
+In eHealth1, it is required that any rights or digital provenance metadata that is general to the package can be held within the root metadata folder and that any rights or digital provenance metadata that is specific to the data held in the representation should be held in the representation metadata folder.
+
+The eHealth1 representation METS document amdSec element should comply with the requirements in the CSIP profile.

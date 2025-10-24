@@ -1,0 +1,66 @@
+// E-ARK Content Information Type Specification for Patient Medial Records - eHealth1
+= E-ARK CITS eHealth1: Content Information Type Specification for Patient Medical Records
+Stephen Mackey
+:revnumber: v${2.0.2}
+:revdate: ${RELEASE_DATE}
+:revremark: Conversion to Asciidocs, fixes to elements cardinality, omproved package diagram.
+:doctype: book
+:imagesdir: figs
+:source-highlighter: rouge
+:rouge-style: github
+:org: Penwern Limited
+:sectnums:
+:partnums:
+:!chapter-signifier:
+:toc: macro
+:description: The eHealth1 specification is built upon work done by the Directorate for Health in Norway on the establishment of a standard \
+for electronically extracting health records from healthcare provider Electronic Medical Records (EMR) systems and their submission to a central health archive. \
+The use cases envisaged for the central health archive are: a. to provide records to next of kin in compliance with open information regulation and \
+b. to harvest the vast amount of historical healthcare-related data for medical research. The CITS takes input from the Norwegian specification on the structure of extractions \
+from submitting systems and puts this into a framework that is compliant with the EARK common and package specifications. \
+The eHealth1 specification also recommends the use of international domain standards for descriptive metadata. \
+The specification is accompanied by two METS profiles for the Root and Representations within the packages.
+
+:sectnums!:
+:partnums!:
+include::common-intro.adoc[]
+
+toc::[]
+
+:sectnums:
+:partnums:
+include::introduction.adoc[]
+include::use_of_mets.adoc
+include::root_mets_element.adoc[]
+include::tables/metadata-root-requirements.adoc[]
+include::root_mets_header_element.adoc[]
+include::tables/metadata-metshdr-requirements.adoc[]
+include::root_mets_descriptive_metadata.adoc[]
+include::tables/metadata-metsdmdsec-requirements.adoc[]
+include::root_mets_administrative_metadata.adoc[]
+include::tables/metadata-metsamdsec-requirements.adoc[]
+include::root_mets_file_section.adoc[]
+include::tables/metadata-filesec-requirements.adoc[]
+include::root_mets_structural_map.adoc[]
+include::tables/metadata-structmap-requirements.adoc[]
+include::representation_mets_element.adoc[]
+include::tables/metadata-reproot-requirements.adoc[]
+include::representation_mets_header_element.adoc[]
+include::tables/metadata-metshdr-requirements.adoc[]
+include::root_mets_descriptive_metadata.adoc[]
+include::tables/metadata-metsdmdsec-requirements.adoc[]
+include::root_mets_administrative_metadata.adoc[]
+include::tables/metadata-metsamdsec-requirements.adoc[]
+include::root_mets_file_section.adoc[]
+include::tables/metadata-filesec-requirements.adoc[]
+include::root_mets_file_section.adoc[]
+include::tables/metadata-filesec-requirements.adoc[]
+include::root_mets_structural_map.adoc[]
+include::tables/metadata-structmap-requirements.adoc[]
+
+include::glossary.adoc[]
+include::appendices/mets.examples.adoc[]
+include::appendices/mets.schema.adoc[]
+include::appendices/mets.vocabs.adoc[]
+include::appendices/mets.metadata.requirements.adoc[]
+include::postface/postface.adoc[]

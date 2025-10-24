@@ -1,0 +1,3 @@
+= Root METS descriptive metadata section (element dmdSec)
+
+The CSIP and IP specifications do not make any assumptions regarding the use of specific descriptive metadata schemas. The structure of the eHealth1 CITS is built on the concept of being patient-centric, and so a standardised metadata schema is preferred for Patient Administrative Information. The use of schemas such as ISO 13606footnote:iso13606[https://www.iso.org/standard/67868.html] or HL7 FHIRfootnote:clinical[https://www.hl7.org/fhir/clinicalsummary-module.html, https://www.hl7.org/fhir/diagnostics-module.html, https://www.hl7.org/fhir/medications-module.html] is suggested but is not mandatory as local regulations and standards may be used.

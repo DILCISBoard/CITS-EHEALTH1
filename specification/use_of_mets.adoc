@@ -1,0 +1,4 @@
+= Use of METS in eHealth1
+
+CSIP specifies that METS files be located at the root of the package folder structure (Root METS) and optionally in each of the representations within its respective root folder (Representation METS).
+

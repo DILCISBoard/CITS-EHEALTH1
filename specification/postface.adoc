@@ -1,0 +1,70 @@
+:doctype: book
+[chapter]
+= Postface
+:figure-caption!:
+:sectnums:
+
+== Authors
+[cols="1,1"]
+|===
+
+|**Name**
+|**Organisation**
+| Stephen Mackey
+| Penwern Limited  
+|===             
+
+== Reviewers
+[cols="1,1"]
+|===
+
+|** Name**     
+| **Organisation**
+| Jaime Kaminski 
+| Highbury R&D
+| Karin Bredenberg
+| Sydarkivera
+|===
+
+== Revision History
+[cols="1,1,1,1,1"]
+|===
+
+| **Revision**
+| **Date**
+| **Authors(s)**
+| **Organisation**
+| **Description**
+| v1.0.0   
+| 31.08.2021 
+| Stephen Mackey 
+| piql AS     
+| Published  
+| v2.0.0   
+| 17.05.2024 
+| Stephen Mackey 
+| Penwern Limited 
+| First major revision to amend structure of aggregations for compliance with CSIP and  correct identified errors 
+| v2.0.1   
+| 13.12.2024
+| Stephen Mackey 
+| Penwern Limited 
+| Minor revision for METS profile corrections, to convert  specification and guideline text to markdown, widening the scope of the specification to include live patients, providing further  descriptions of standards in guideline and add example SIP.
+| v2.0.2   
+| 15.10.2025
+| Stephen Mackey 
+| Penwern Limited 
+| Minor revision to align METS Header Agent element with SIP revision, METS profile corrections and convert specification and guideline text to AsciiDocs.
+|===  
+
+== Statement of originality
+
+This deliverable contains original unpublished work except where clearly indicated otherwise. Acknowledgement of previously published material and of the work of others has been made through appropriate citation, quotation or both.
+
+== Contact & Feedback
+
+The CITS eHealth1 is maintained by the Digital Information LifeCycle
+Interoperability Standard Board (DILCIS Board). For further information about the DILCIS Board or feedback
+on the current document please consult the website (<http://www.dilcis.eu/>) or contact us at
+<mailto:info@dilcis.eu>.
+
