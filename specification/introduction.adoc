@@ -1,4 +1,4 @@
-:doctyoe: book
+:doctype: book
 [chapter]
 = Introduction
 :figure-caption!:

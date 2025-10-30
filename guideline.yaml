@@ -1,0 +1,9 @@
+---
+appendices:
+
+  - name: mets.vocabs
+    heading: "External Vocabularies"
+    label: "A"
+    type: mets
+    section: Vocabulary
+

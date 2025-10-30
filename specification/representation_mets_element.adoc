@@ -1,4 +1,9 @@
-= Representation METS File
+:doctype: book
+[chapter]
+= = Representation METS File
+:figure-caption!:
+:sectnums:
+:imagesdir: figs
 
 The representation METS files is used to describe the data structure as included in the data folder of the Representation  Medical Record) via the structMap element and to reference any additional descriptive metadata.
 

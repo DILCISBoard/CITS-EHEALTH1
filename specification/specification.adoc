@@ -1,4 +1,4 @@
-:doctype: bbok
+:doctype: book
 [chapter]
 = Specification
 :figure-caption!:

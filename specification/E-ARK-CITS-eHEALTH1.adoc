@@ -3,7 +3,7 @@
 Stephen Mackey
 :revnumber: v${2.0.2}
 :revdate: ${RELEASE_DATE}
-:revremark: Conversion to Asciidocs, fixes to elements cardinality, omproved package diagram.
+:revremark: Conversion to Asciidocs, fixes to elements cardinality, improved package diagram.
 :doctype: book
 :imagesdir: figs
 :source-highlighter: rouge
@@ -30,7 +30,8 @@ toc::[]
 :sectnums:
 :partnums:
 include::introduction.adoc[]
-include::use_of_mets.adoc
+include::specification.adoc[]
+include::use_of_mets.adoc[]
 include::root_mets_element.adoc[]
 include::tables/metadata-root-requirements.adoc[]
 include::root_mets_header_element.adoc[]
@@ -57,10 +58,15 @@ include::root_mets_file_section.adoc[]
 include::tables/metadata-filesec-requirements.adoc[]
 include::root_mets_structural_map.adoc[]
 include::tables/metadata-structmap-requirements.adoc[]
-
+include::deprecated_requirements.adoc[]
+include::descriptive_metadata.adoc[]
 include::glossary.adoc[]
 include::appendices/mets.examples.adoc[]
 include::appendices/mets.schema.adoc[]
 include::appendices/mets.vocabs.adoc[]
 include::appendices/mets.metadata.requirements.adoc[]
+
+:sectnums!:
+:partnums!:
+
 include::postface/postface.adoc[]

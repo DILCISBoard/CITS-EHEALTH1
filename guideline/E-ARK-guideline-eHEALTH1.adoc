@@ -1,0 +1,42 @@
+// E-ARK Content Information Type Specification Guideline for Patient Medial Records - eHealth1
+= E-ARK CITS eHealth1: Content Information Type Specification Guideline for Patient Medical Records
+Stephen Mackey
+:revnumber: v${2.0.2}
+:revdate: ${RELEASE_DATE}
+:revremark: Conversion to Asciidocs, improved package diagram.
+:doctype: book
+:imagesdir: figs
+:source-highlighter: rouge
+:rouge-style: github
+:org: Penwern Limited
+:sectnums:
+:partnums:
+:!chapter-signifier:
+:toc: macro
+:description: The eHealth1 specification is built upon work done by the Directorate for Health in Norway on the establishment of a standard \
+for electronically extracting health records from healthcare provider Electronic Medical Records (EMR) systems and their submission to a central health archive. \
+The use cases envisaged for the central health archive are: a. to provide records to next of kin in compliance with open information regulation and \
+b. to harvest the vast amount of historical healthcare-related data for medical research. The CITS takes input from the Norwegian specification on the structure of extractions \
+from submitting systems and puts this into a framework that is compliant with the EARK common and package specifications. \
+The eHealth1 specification also recommends the use of international domain standards for descriptive metadata. \
+The specification is accompanied by two METS profiles for the Root and Representations within the packages.
+
+:sectnums!:
+:partnums!:
+include::common-intro.adoc[]
+
+toc::[]
+
+:sectnums:
+:partnums:
+include::guideline.adoc[]
+include::glossary.adoc[]
+include::appendices/mets.vocabs.adoc[]
+
+
+:sectnums!:
+:partnums!:
+
+include::postface/postface.adoc[]
+
+
