@@ -1,0 +1,377 @@
+:doctype: book
+[chapter]
+= Guideline
+:figure-caption!:
+:sectnums:
+:imagesdir: figs
+
+== Purpose
+
+The purpose of this document is to provide background and context for the Content Information Type Specification (CITS) for Patient Medical Records (eHealth1). The specification is further supported by METS profiles for the Root and Representation METS files. The initial development of the specification was based on work done at the Norwegian National Health Archive (NHA) and is being enhanced and developed further through community feedback.
+
+== Scope
+
+This specification makes the following assumptions:
+
+* A business case for the creation of an eHealth archive includes the incorporation of a backlog of physical and digital Patient records. 
+* An eHealth archive concerns the Complete Patient Medical Records for Patients within the jurisdiction. Note that the term ‘jurisdiction’ does not imply that a Central Health Archive must be at a national or federal level. Many health administrations are organised at a state or region level, and the specification is equally valid for this scenario. Note also that there are significant potential benefits for the use of the standard for archiving of Patient Medical Records if complied with by all regional administrations within a federation. This can also apply to environments where there are private healthcare providers, and a Central Health Archive is being created by a controlling administration.
+* Implementation of Electronic Health Record (EHR) systems is not widespread, and the creation of an eHealth archive that aggregates information from both EMR and EHR systems is considered to be a special case that can be considered within future iterations of this specification, see section <<_electronic_medical_record_and_health_record_systems>> for how the specification defines EHR and EMR systems).
+* The use cases for an eHealth archive are described in section <<_use_cases_for_a_central_health_archive>>.
+
+
+There are two options for extracting Patient records from an EMR or EHR system which can be dependent to a certain extent on the source system data structure:  
+
+=== Extracting data in a relational database structure
+
+If the structure of the source EHR/EMR system is largely or wholly a relational database, then the extraction of selected records can be made into a long-term database preservation format (SIARD) that preserves the properties of the database such that the data can be imported into a relational database management system (RDBMS) at the time of access. Access can happen through database queries or a search field.
+
+Further information on the limitations of this approach, particularly for the use cases behind the eHealth1 CITS is given in <<_data_structure_and_aggregations>>.
+
+The SIARD specification, together with a Content Information Type Specification for SIARD, represents the SIP profile for the relational databases content type. More information can be found on the Dilcis site at: https://dilcis.eu/content-types/siard.
+
+Extractions can be made from such relational database systems programmatically that create the aggregated structure described below which conforms to that seen in traditional EMR systems and physical Patient record archives. For the use cases described in this Content Information Specification it is recommended that this approach is followed.
+
+=== Extracting data and metadata as aggregations of Patient medical records
+
+Digitisation of physical Patient Medical Records or extraction of electronic records from more traditional EMR systems produces a case type structure of files and accompanying metadata as described in section <<_elements_of_a_health_archive>>. Being extracted in this manner makes them directly accessible for validation, data management, indexing and searching. The structured semantic metadata description is explicit rather than hidden inside an RDBMS.  This methodology also supports the incremental extraction of records over time for submission to the Archive, and in addition:
+
+* Records from different sources can be merged (complete Patient Medical Records can be synthesised from multiple submissions)
+* Search and access is possible across all records and sources
+* Records can be managed individually and uniformly
+* The original EMR/EHR system software does not need to be licensed or preserved
+* The specification considers this particular extraction method within the context of the use cases as described in <<_use_cases_for_a_central_health_archive>>.
+
+== Layered Data Model
+
+This section introduces the role of the CITS eHealth1 and its dependencies on the basic structures of the Information Package.
+
+[example]
+This specification is created based on the requirements of the Common Specification for Information Packages (CSIP),  the specification for Submission Information Packages (E-ARK SIP) and the specification for Archival Information Packages (E-ARK AIP). To fully understand its requirements, we highly recommend that users review the requirements and the terminology of the source documents, before using this specification.
+
+The data model structure is based on a layered approach for information package definitions, <<_figure_2>>. The Common Specification for Information Packages (CSIP) forms the outermost layer. The general SIP, AIP and DIP specifications add respectively, submission, archiving and dissemination information to the CSIP specification. The third layer of the model represents specific content information type specifications, such as the eHealth1 specification. Additional layers for business-specific specifications and local variant implementations of any specification can be added to suit the needs of the organisation.
+
+[[_figure_2]]
+.Figure 2: Data Model Structure
+image::fig_2_data_model_structure.svg[] 
+
+Every level in the data model structure inherits metadata entities and elements from the higher levels. In order to increase adoption, a flexible schema has been developed. This will allow for extension points where the schema in each layer can be extended to accommodate additional information on the next specific layer until, finally, the local implementation can add specific entities or metadata elements to satisfy specific local needs. Extension points can be implemented by:
+
+* Embedding foreign extension schemas (in the same way as supported by METS [http://www.loc.gov/standards/mets/] and PREMIS [http://www.loc.gov/standards/premis/]). These both support increasing the granularity of existing metadata elements by using more detailed data structures as well as adding new types of metadata.
+* Substituting metadata schemas for standards more appropriate for the local implementation.
+
+The structure allows the addition of more detailed requirements for metadata entities, for example, by:
+
+* Increasing the granularity of metadata elements by using more detailed data structures, or
+* Adding local controlled vocabularies.
+
+For consistency, design principles are reused between layers as much as possible.
+== CITS eHealth1 Specification Requirements Structure
+
+The Content Information Type Specification for Patient Medical Records (CITS eHealth1) aims to define the necessary elements required to preserve the accessibility and authenticity of Patient Medical Records over time and across changing technical environments. The specification elevates the level (and adjusts the cardinality) of some of the requirements set out in the Common Specification (CSIP) and package specifications (namely SIP) and adds new requirements for the package structure, descriptive metadata and accompanying METS files. The specification sets out general principals that underpin the specific requirements and further context for the requirements and principals can be found in this  Guideline document.
+
+== Elements of a Health Archive
+
+=== Physical and Electronic Patient Records
+
+A Patient Medical Record can be defined as: “a collection or compilation of recorded information about a Patient in connection with healthcare; the Patient record is the principal repository for information concerning a Patient’s health care”.footnote:[Institute of Medicine (US) Committee on Improving the Patient Record; Dick RS, Steen EB, Detmer DE, editors. The Computer-Based Patient Record: Revised Edition: An Essential Technology for Health Care. Washington (DC): National Academies Press (US); 1997. 1, Introduction. Available from: https://www.ncbi.nlm.nih.gov/books/NBK233055/]
+
+Prior to the widespread implementation of Electronic Medical Record (EMR) systems, the recording of Patient health records was paper and film-based (plus additional materials which could be images, video, audio).
+Electronic Medical Records (EMRs) are digital versions of paper or film records. A healthcare provider may have a single EMR system for all of its Patient records or for larger organisations; there can be fragmentation because of specialisation or organisational sub-division, and a Patient’s total medical record at that organisation may be constituted from many subsidiary systems. A considerable volume of these Patient records exist at healthcare providers and within centralised organisations because of legal remits to store the records for extended periods.
+
+A Complete Patient Medical Record may contain information that is sourced from several different organisations’ systems (e.g. different hospitals, specialist healthcare providers, primary healthcare providers) and viewed from an archive/academic perspective; the information in each of these organisations constitutes an archive (or several archives).  In creating a Central Health Archive, it is necessary for a healthcare provider to make separate extractions from each system, for each Patient to be included in a delivery and to aggregate them before submission to the central archive.
+The creation of a Central Health Archive can encompass the digitisation and preservation of physical records as well as the collection and preservation of electronic records from EMR systems. A Patient’s aggregated medical record is not complete until there are no new additions to it (i.e. when the individual has died), but depending on local practice a health archive can consist only of records for Patients who are known or who are believed to be deceased or of live and deceased patients.
+
+=== Electronic Medical Record and Health Record Systems
+
+The terms “electronic medical record” and “electronic health record” (or “EMR” and “EHR”) can be used interchangeably. However, the difference between the two terms is quite significant and particularly so in the context of archiving standards.
+
+EMR is the older term, and early EMRs were medical in nature; they were for use by clinicians mostly for diagnosis and treatment. Because of a lack of available standards when EMR systems were first developed, the information in EMRs does not travel easily out of a healthcare provider. In fact, the Patient’s record might have to be printed out and delivered by mail to specialists or other members of the care team. In that regard, EMRs are not much better than paper records.
+
+Electronic health records (EHRs) focus on the total health of the Patient—going beyond standard clinical data collected in the provider’s office and inclusive of a broader view on a Patient’s care. EHRs are designed to reach out beyond the health organisation that originally collects and compiles the information. They are built to share information with other healthcare providers, such as laboratories and specialists, so they contain information from all the clinicians involved in the Patient’s care. The National Alliance for Health Information Technology stated that EHR data “can be created, managed, and consulted by authorised clinicians and staff across more than one healthcare organisation”.footnote:[ https://www.healthcareusability.com/article/terminology-hit-emr-ehr]
+
+The information moves with the Patient—to the specialist, the hospital, the nursing home, or even across a region or country. In comparing the differences between record types, HIMSS footnote:[HIMSS Analytics himssanalytics.org]  Analytics stated that “the EHR represents the ability to easily share medical information among stakeholders and to have a Patient’s information follow him or her through the various modalities of care engaged by that individual.” EHRs are designed to be accessed by all people involved in the Patient’s care—including the Patients themselves. Indeed, that is an explicit expectation in the Stage 1 definition of “meaningful use” of EHRs.
+
+The benefits of EHR systems to Patient care mean that the trajectory for healthcare worldwide is towards national or regional EHR systems. The complexity and lack of standards in existing systems mean that realisation is difficult and expensive. Adoption is hence not yet widespread. Implementations of EHR systems can also rely on summary Patient data gathered by means of standardised clinical documents (such as HL7 CDAs). This means that extractions from EHR systems can sometimes only yield Patient summary data and not the Complete Patient Medical Record.
+
+The development of standards and technology that make EHR systems possible (such as the encoding of key clinical data, medical data interoperability standards such ICD, DICOM, SNOMED and HL7 FHIR) makes the future scope of a national health archive a different proposition; systems will exist containing a Patient’s total health history, richly encoded and ideally suited to analytical techniques for ‘big data’. Systems in principle will be able to grow over time containing records from both live and deceased Patients.
+
+=== Use Cases for a Central Health Archive
+
+The eHealth1 Content Information Specification (CITS) was developed as a result of creation of a centralised Patient Medical Record archive in Norway. According to the health archive regulation, the mission of the Norwegian National Health Archive (NHA) footnote:[https://ehandbok.arkivverket.no/folder/92] is to:
+
+* receive and preserve Patient archives from public and private hospitals, and
+* to disseminate health information for researchers and the Patients next of kin in compliance with regulations and confidentiality acts.
+
+There is no limit to the age of the records to be presented to the NHA from hospitals and so consist of physical and electronic Patient records.
+
+The Norwegian regulation envisions two possible use cases for the archive when built, which are:
+To provide records to next of kin in compliance with open information regulation;
+To harvest the vast amount of historical healthcare-related data within the archive for medical research.
+In order to achieve use case a, it is necessary to ensure that the specification allows for access to all of the records pertaining to a single Patient, regardless of the submitting institution.
+Use case 2. requires that the specification allows for ingestion of digitised records and the ingestion of extracts from EMR systems for all Patients and that sufficient metadata is provided to enable searches across the archive to create cohorts to support medical research. Metadata regarding Patient personal information and Patient clinical information may be encoded in EMR systems or may have to be entered at a digitisation stage. The scope of the metadata to be included in the archive is therefore very much a determination for the local and national organisations based on the existing records, resources available, standards, etc.
+
+== Standards
+
+=== eHealth Standards and their use in the eHealth1 Specification
+
+Controlled vocabularies and coding provide a standardised way for the unambiguous recording of health data. Most EMR and all EHR systems will hold coded data concerning Patient Cases that can be extracted as metadata for the Patient Medical Record and will use an international standard such as ICD or SNOMED. Data can be recorded in standardised (such as ISO 13606 or FHIR) formats or to a local format which is specified by the health archive and referenced within a Submission Agreement.
+
+=== HL7 FHIR
+
+Fast Healthcare Interoperability Resources footnote:[<https://www.hl7.org/fhir/summary.html>] (FHIR, pronounced “fire”) is a standard describing data formats and elements (known as ‘resources’) and an application programming interface (API) for exchanging electronic health records (EHR). The standard was created by the Health Level Seven International (HL7) healthcare standards organisation. Its goals are to facilitate interoperation between legacy healthcare systems, to make it easy to provide healthcare information to healthcare providers and individuals on a wide variety of devices from computers to tablets to mobile phones and to allow third-party application developers to provide medical applications which can be easily integrated into existing systems footnote:[<https://en.wikipedia.org/wiki/Fast_Healthcare_Interoperability_Resources>]. FHIR provides resources that can be used for the standardised description of Patient Personal Information and Patient Clinical Information, which reference controlled vocabulary and coding standards such as ICD and SNOMED and are encoded in XML, JSON and Turtle schemas.
+
+=== HL7 Clinical Document Architecture and CDA R2 International Patient Summary
+
+HL7 CDA footnote:[<http://www.hl7.org/implement/standards/product_brief.cfm?product_id=483>] provides a standard for the organisation of material within clinical documents for exchange between systems. By using XML, the HL7 v3 standard and coded vocabularies, the CDA facilitates the exchange of both machine and human-readable documents, enabling electronic processing for decision support, etc., whilst being easily retrieved and used by the people who need them.
+
+According to HL7 : “An International Patient Summary (IPS) document is an electronic health record extract containing essential healthcare information intended for use in the unscheduled, cross-border care scenario, comprising at least the required elements of the IPS dataset. The IPS dataset is a minimal and non-exhaustive Patient summary dataset, specialty agnostic, condition-independent, but readily usable by clinicians for the cross-border unscheduled care of a Patient.”
+
+=== openEHR
+
+openEHR footnote:[<https://openehr.org/>] is an open standard specification that describes the management and storage, retrieval and exchange of health data in electronic health records (EHRs). In openEHR, all health data for a person is stored in a "one lifetime", vendor-independent, person-centred EHR. The openEHR specifications include an EHR Extract specification but are otherwise not primarily concerned with the exchange of data between EHR-systems as this is the focus of other standards such as ISO 13606 and HL7 footnote:[<http://www.en13606.org/information.html>], however XML and JSON schemas are in development for exchange of openEHR data.
+
+=== ISO 13606
+
+ISO 13606 footnote:[<https://en.wikipedia.org/wiki/OpenEHR>] is a standard from the International Standardization Organization (ISO), originally designed by the European Committee for Standardization (CEN). The overall objective of the ISO 13606 standard is to define a rigorous and stable information architecture for communicating part or all of the electronic health record (EHR) of a single subject of care (patient) between EHR systems, or between EHR systems and a centralized EHR data repository. It may also be used for EHR communication between an EHR system and clinical applications or middleware components (such as decision support components) that need to access EHR data, or as the representation of EHR data within a distributed (federated) record system. An XML schema is available for ISO 13606.
+
+===  ICD
+
+The International Classification of Diseases footnote:[<https://www.who.int/classifications/icd/en/>] is the foundation for the identification of health trends and statistics globally and the international standard for reporting diseases and health conditions. It is the diagnostic classification standard for all clinical and research purposes. ICD defines the universe of diseases, disorders, injuries and other related health conditions, listed in a comprehensive, hierarchical fashion that allows for:
+
+* easy storage, retrieval and analysis of health information for evidence-based decision making;
+* sharing and comparing health information between hospitals, regions, settings and countries; and
+* data comparisons in the same location across different time periods.
+
+ICD is mapped from other standards such as HL7 FHIR and will be part of the process used by many institutions to record Patient Clinical Information. The use of international standards such as ICD within supplied clinical metadata is encouraged but will be limited by their use within the source EMR or EHR system.
+
+===  SNOMED
+
+SNOMED CT footnote:[ <http://www.snomed.org>] or SNOMED Clinical Terms is a systematically organised computer processable collection of medical terms providing codes, terms, synonyms and definitions used in clinical documentation and reporting. SNOMED CT is considered the most comprehensive, multilingual clinical healthcare terminology in the world. The primary purpose of SNOMED CT is to encode the meanings that are used in health information and to support the effective clinical recording of data to improve Patient care. SNOMED CT provides the general core terminology for electronic health records footnote:[<https://en.wikipedia.org/wiki/SNOMED_CT#:~:text=SNOMED%20CT%20or%20SNOMED%20Clinical,in%20clinical%20documentation%20and%20reporting>].
+
+SNOMED CT is mapped from other standards such as HL7 FHIR and will be part of the process used by many institutions to record Patient Clinical Information. The use of international standards such as SNOMED CT within supplied clinical metadata is encouraged but will be limited by their use within the source EMR or EHR system.
+
+=== DICOM
+
+Digital Imaging and Communications in Medicine (DICOM) footnote:[<https://www.dicomstandard.org/current/>] is the standard for the communication and management of medical imaging information and related data.
+
+A DICOM file is a file that encapsulates attributes and bit streams (image, video, etc.) and has embedded Patient Personal Information and IDs. DICOM files have a recognised MIME file type. Extraction of DICOM files from specialised EMR systems for inclusion in Patient Medical Records should present no problem, but it should be ensured that Patient IDs in DICOM files match those in archival package Patient Personal Information.
+
+=== eHealth DSI (eHealth Digital Service Infrastructure)
+
+The eHealth Digital Service Infrastructure (eHDSI or eHealth DSI) footnote:[<https://ec.europa.eu/cefdigital/wiki/display/EHOPERATIONS/eHealth+DSI+Operations+Home>] is the initial deployment and operation of services for cross-border health data exchange under the Connecting Europe Facility (CEF). It defines a document framework or Clinical Document Architecture (CDA) for sharing medical data across borders (Patient Summary). As E-ARK eHealth1 considers the totality of a Patient Medical Record, the eHDSI is too limited in scope to be useful in this context, eHDSI aims to specify an interchangeable derivation and extract of a Patient Medical Record, whereas the E-ARK eHealth1 CITs aims to preserve the Patient Medical Record in its entirety.
+
+== Data Structure and Aggregations
+
+=== Case Structure
+
+The names of aggregation levels within an archive and represented within an archival package (IP) will depend on the agreements between data producers (Creators) and archives. EAD3 has defined a set of values (class, collection, file, fonds, item, otherlevel, recordgrp, series, subfonds, subgrp, subseries) for that purpose, and it allows other values to be used in addition if they are defined as “otherlevel”. However, even though the aggregation levels in this context could be described in this way, the EAD template for archival description is considered unsuitable for describing the aggregations in a Patient Health Archive but may be used for general archival information. 
+
+A Central Patient Health Archive has a single purpose and will most probably (due to security constraints) be instituted as a stand-alone entity or as a sub-entity within a larger institution (e.g. National Archive or Health Authority). The overall aggregation of a health archive is therefore implicit (it is an aggregation of Patient Medical Records), and further aggregation levels must be defined that suit the use cases for navigation within the archive and for the way in which the archive is populated.
+
+Patient data will most likely be submitted by hospitals or other healthcare providers in periodic batches, consisting of multiple Patient records. Patient Medical Records may be submitted to a Central Health Archive when a Patient is known to have died, after a period of time when it is not feasible that a Patient is still alive (determined through regulations) or as periodic submission through the patient’s life. Depending upon the availability of a National Death Register, the accessibility and responsiveness to such a register and the periodic batching of archival extracts at healthcare providers, it cannot be expected that individual Patient submissions from multiple creators will be at all coordinated. Aggregation of a Complete Patient Record at the archive prior to submission into the preservation system is therefore deemed in this specification to be unlikely to be practical.
+
+The proposed data structure for the aggregations of the submissions of Patient Medical Records is as shown in the data model in <<_figure_3>>. As Patient data is likely to be submitted in batches, each submission package will contain information from multiple Patients, and it is likely that these submissions will be split by the archive on receipt to create Patient-specific archival information packages (AIPs) in order to simplify the dissemination process. In this context, the submission package could be considered as a submission information collection (SIC) or collation of SIPs which is compiled to simplify extraction and transmission. However, for the purposes of this specification, the term SIP is used to mean both a submission package for a single Patient record or a submission package containing multiple Patient records. 
+
+The levels of the aggregation in an eHealth1 package are proposed as follows:
+
+* Patient: An individual who has received healthcare at any number of healthcare providers and who is described by Patient Personal Information <<_metadata>>. Each Patient will be identified by means of a unique identifier (ID) which is provided from the source EMR system. This unique ID connects the Patient Personal Information and the Patient Medical Record in the information package.
+* Case: A Patient Medical Record can be structured in various ways, which may be dictated by national standards, guidance or local practice. A Patient’s Complete Medical Record will consist of multiple individual thematic Cases which may be concerned with particular medical conditions, periods or treatments. The proposed aggregation allows for flexibility in this grouping. These cases will be held in a healthcare provider’s local archive and may contain a number of Sub-cases and/or Documents with associated Data Files. 
+* Sub-case: A Sub-case is an allowable type of component consisting of a set of Documents and Data Files that is nested below a Case. Sub-cases may originate in departments within a large hospital or may be related to a different diagnosis to other Sub-cases. A Sub-case may have common (to the Case) or specific metadata.
+* Document: A Document is a component that may consist of multiple related Data Files with common metadata; for example, a document may be a PDF file together with associated attachments, or there may be a document and a separate signature sheet. A document can be considered to be an entity that is approved/signed as a whole.
+* Data File: A Data file is a component that contains data and has an associated MIME file type. A Data File can be a single bit stream or can encapsulate bit streams and attributes according to a standard such as a DICOM or MP4, in which case it will have a recognised MIME file type. A Data File which is a container for multiple byte streams and metadata, can be included in the package as a Data File or can be unpacked and included as separate Byte Streams and metadata in METS. It is expected that containers such as DICOM and MP4 files will be submitted unaltered in Submission Information Packages (SIPs) and that any decision to unpack them is part of a preservation plan at the archive. 
+* Byte Stream: A Byte Stream is a component that contains data, has an associated MIME file type and is encapsulated in a container such as MP4, DICOM or Matroska. Each Byte Stream has its own associated metadata, such as technical metadata which is generally only accessible with specialised tools (such as ffprobe for video container formats).
+
+The proposed levels of aggregation are a suggestion and generally will take the form of that in the source EMR system and so may take account of local language and/or source system directory structures. If local terms are used, the addition of a revised vocabulary to the package for data structure terms is recommended, which should be placed in the schemas folder.
+
+[[_figure_3]]
+.Figure 3: eHealth1 SIP Data Model
+image::fig_3_eHealth1_SIP_Data_Model.svg[]
+
+=== Examples of Different Patient Record Submissions
+
+With the flexibility of the structure of the eHealth1 archival package and the differences that are likely to be found in making Patient Medical Record extractions from disparate EMR systems, there can be expected to be different cases for the extraction of records.
+
+==== Example 1: The entire archived Patient Medical Record as one file (document)
+
+In this example, the extraction of a Patient’s Medical Record consists of one unstructured file in, for example, PDF format, which contains a complete extract from an EMR system. In such a case, an archived Patient Medical Record will consist of one Case containing one Document and one Data File <<_figure_4>>.
+
+[[_figure_4]]
+.Figure 4: Archived Patient Medical Record as one File
+image::fig_4_archived_patient_medical_record_one)file.svg[]
+
+==== Example 2: The archived Patient Medical Record as a set of thematic files (documents)
+
+In this example, extraction of the Patient’s Medical Record consists of a set of unstructured files, typically PDF documents, where each file includes all of the information within a subject/theme that reflects the organisation of information in the current system. In this example, an Archived Patient Medical Record would consist of a number of Cases, each containing one Document, each containing one Data File <<_figure_5>>.
+
+[[_figure_5]]
+.Figure 5: Archived Patient Medical Record as set of Files
+image::fig_5_archived_patient_medical_record_set_files.svg[]
+
+==== Example 3: The archived Patient Medical Record as a set of Documents per Case
+
+In this example, extraction of the Patient’s Medical Record consists of a set of unstructured files which can be documents, images, videos, DICOM files, etc., and where each Data File may be related to other Data Files within a Document which can be related to each other within a Case or a Sub-case <<_figure_6>>.
+
+[[_figure_6]]
+.Figure 6: Archived Patient Medical Record as set of Documents
+image::fig_6_archived_patient_medical_record_set_documents.svg[]
+
+=== Using the eHealth1 specification together with the Common Specification for Information Packages (CSIP)
+
+The eHealth1 specification conforms to and extends the Common Specification for Information Packages (CSIP) and the specification for Submission Information Packages (E-ARK SIP). When extractions are made from EMR systems according to the structure described, they can be transmitted in a package following the principles described in the CSIP and IP specifications.
+
+=== Placement of data in an eHealth1 Information Package
+
+As described in the section 'Case Structure', Patient data as submitted by hospitals or healthcare providers are likely to be periodically extracted from source systems and sent in batches. The eHealth1 specification allows for the inclusion of multiple Patients per package, and so these batches can be transmitted in a single submission. The number of Patients included in each AIP is then a matter for local implementation, although the decision in Norway at the National Health Archive was for each AIP to consist of data from a single Patient and from a single Submitting Organisation.
+
+Patient Medical Records are placed in a single representation within the representations folder of the package. The ID of the representation should have a name that follows the requirements of CSIP.
+
+The Patient Medical Record representation should contain a METS file at its root (Representation METS),  and the folder structure must follow that defined by the CSIP including containing a data folder. Multiple Patient Records are organised within the representation data folder in individual folders that have names that must contain the Patient unique identifier.
+
+It is recommended but not mandated that within each Patient Record folder that there are further folders that physically represent the Case, Sub-case, Document structure to aid human readability and navigation of the archive. If Patient Administrative and/or Patient Clinical Information is provided, then this is held at the appropriate level within the Case structure in the Patient Medical Record. <<_figure_7>> shows an example of a folder structure for a representation where there are multiple Patient submissions and clinical metadata included.
+
+The package should contain a Patient Administrative Information or manifest file within the root metadata/descriptive folder that at minimum contains the names of the Patients whose records are contained in the package and a reference to their Patient ID.
+
+[[_figure_7]]
+.Figure 7: Example of Package Folder Structure
+image::fig_7_package_structure.svg[]
+
+=== Archival Package (AIP) Representations
+
+The CSIP and SIP specifications allow that packages contain multiple representations of data that form a single intellectual entity, be this an aggregation within an archival taxonomy, geophysical data with a given boundry or a complete archived relational database. Representations allow the same intellectual entity to be represented in different formats for example for long-term preservation or for access purposes.
+
+In this version 2 of the eHealth1 specification Patient Medical Records have been organised into a single representation of a Submission Package such that multiple representations of data can be created within Archival Packages in order to aid preservation. This is a different organisation to version 1 of the specification, but allows the archiving of packages containing multiple, different Patient Records per AIP and for the for 
+
+== General Requirements & Rationales
+
+*EHGR1* – submission packages MUST contain at least one representation containing data from one or more Patients.
+
+_Rationale_ – the eHealth1 SIP is structured to allow aggregations of multiple Patient submissions into a single package, within a minimum single representation.
+
+*EHGR2* – data from multiple Patients if present MUST be divided into separate Patient Record folders in the data folder of the representation.
+
+_Rationale_ – aggregations of multiple Patient’s data into a single SIP eases and simplifies the task for data producers to submit many records in batch submisions and subsequent processing at the archive. Organisation of the Patient Records into a single representation in the SIP allows for creating multiple Patient Recoprd AIPs and for generation of additional representations over time.
+
+*EHGR3* – Patient data in a Patient record SHOULD follow a Case/Document/File or Case/Sub-case/Document/File structure.
+
+_Rationale_ – the Case/Sub-case/Document/File structure in eHealth1 follows a typical Patient Medical Record structure found in physical and EMR systems. It allows both digitised and born digital records to co-exit in the same archive and the Patient centricity allows secure and simple extraction of all data for a single Patient.
+
+*EHGR4* – each submission package SHOULD contain a submission agreement in the root /documentation folder.
+
+_Rationale_ – a submission agreement between producer and archive details the agreement reached between the archive and producer on submission formats and other submission conditions or arrangements. A machine-readable format is recommended sych as that developed by Docuteam GmbH at:  <http://www.loc.gov/standards/mets/profiles/00000041.xml>
+
+*EHGR5* – there MUST be a Patient manifest or Patient Administrative Information file located in the root /metadata/descriptive folder that at a minimum contains Patient names and unique identifiers. The Patient Administrative Information file MAY contain personal, demographic and clinical information such as to aid searches for next of kin and research cohorts.
+
+_Rationale_ – metadata in the root of the package should facilitate search and location of individual Patient Records such as to facilitate location of all data associated with a single Patient. It can also contain information such as to support searches based on demographic or clinical information in order to build cohorts of data for researchers.
+
+*EHGR6* – each Patient Record SHOULD contain additional Patient Administrative Information and Clinical Information file(s).
+
+_Rationale_ –data/metadata located in the individual Patient Records can be extracted at the archive and used to build search indexes and databases such as to meet use cases for access such as next of kin information requests and creation of cohorts of data for research purposes
+
+== Metadata
+
+=== Use of METS in eHealth1
+
+CSIP specifies that METS files be located at the root of the package folder structure (Root METS) and optionally in each of the Representations within its respective root folder (Representation METS). As has been described previously, the eHealth1 CITS defines a package that has been submitted by a single institution and may contain information concerning either single or multiple Patients. In the case of a multiple Patient submission, there will be multiple Patient Records within a data folder in a single  Representation, with its own Representation METS file.
+
+==== Root METS File
+
+The root METS file must adhere to the requirements of the CSIP and Information Package specifications. In addition, there are specific requirements for the eHealth1 CITS, and in some cases, the level of the CSIP or package requirements have been increased (but never decreased). Detailed requirements for the root METS file are found in the specification document.
+
+==== Representation METS File
+
+The Representation METS file is used to describe the data structure of the Patient Medical Records held in the data folder of the Representation via the structMap element and to reference any additional technical metadata. Details of requirements for the Representation METS can be found in the specification document.
+
+=== Use of Descriptive Metadata in eHealth1
+
+==== Archival Information
+
+According to local factors the health archive may be a distinct, specialised entity containing only Patient Medical Records or a mixed archive containing other types of records. In the case of a single subject archive the description of the archive is implicit and archival description information may be recorded outside of the archival packages themselves. In the case of a mixed archive it will be necessary to include archival description records in each archival package which should then follow the requirements of the Common Specification for Archival Information, use a standardised schema such as EAD3 or Dublin Core or a localised schema definition.
+
+==== Patient Identifiers
+
+Patients must have a nationally unique identifier that is referenced within the source EMR system, such as a Social Security or other unique individual identifier.
+
+==== Patient Personal Information
+
+Patient Personal Information should, wherever possible conform to an international or national standard for extracting Patient information within EMR of EHR systems (e.g. ISO 13606 or HL7 FHIR). At a minimum the file located in the root/metadata/descriptive folder must contain Patient names and unique identifiers and may contain personal and demographic information.
+
+==== Patient Clinical Information
+
+Structured Patient Clinical Information such as diagnoses, procedures, medication, allergies, etc., can add significant value to the Health Archive and, in particular, to the research use cases as described above. Patient Clinical Information associated with the Patient or Patient Cases can be added to the individual Patient Records either at Patient or appropriate Case, Sub-case or Document level. Patient Clinical Information should, wherever possible, conform to an international or national standard for extracting Patient Clinical Information from EMR or EHR systems (e.g. ISO 13606 or HL7 FHIR) [Standards](#standards).  Clinical Information should use recognised vocabularies and coding such as ICD and SNOMED.
+
+== Examples of application of the eHealth1 Specification
+
+=== Example 1 – the Piql eHealth SIP Creator (piqlIngest)
+
+==== Introduction
+
+The Piql EHealth SIP Creator was developed as part of the E-ARK3 project in 2021 by Piql AS of Norway who were also the lead authors of the eHealth1 CITS as part of the project consortium. The objective of the development was to accompany the creation of the eHealth1 specification with: “..new supporting software services ...” and specifically “inclusion of an eHealth1 SIP creation component into the Sample Software Portfolio.” Consequently the Piql activity focused on the creation of an eHealth SIP creation software tool.
+
+The eHealth1 specification builds on work done in Norway for standardisation of submissions to the National Health Archive (NHA), specifically via the EPJ (Electronic Patient Journal) specification for extraction of records from hospital Electronic Medical Record systems (EMR) [^16]. The Norwegian specification assumes that EMR system vendors will adapt their software to produce compliant submissions (as is required of the hospital by law). It is anticipated that this could be problematic in any jurisdiction, as there are few incentives for EMR system vendors to do this work. In general, any data producers requirement will be for simplicity in the production of compliant SIPs, i.e. using the standard database structures of the host EMR, extraction using easily available tools on standard platforms, consistency in processes and efficient production with common IT skills.
+
+The Piql SIP Creator specification described an approach that required a lower level of bespoke work at system vendor or hospital level and proposed a SIP creation tool that could universally produce compliant submissions (to eHealth v1.0) for data exported from source EMR systems through SQL (or similar) queries. In addition the project produced a User Guide detailing the requirements for the submitting organisation.
+
+Any central health archive may introduce additional requirements for the SIPs which extend or make mandatory requirements within the existing specification (e.g. metadata standards, submission agreements). The tool is open-source and available at GitHub at: <https://github.com/E-ARK-Software/piql_ingest>. Any Central Health Archive or data producer can modify the code to suit individual requirements. Note that the tool was written to support v1 of the specification and there is no current plan for it to be adapted to support v2.
+
+==== SIP Creator Tool
+
+The Piql E-ARK SIP Creator is a version of an existing Windows desktop ingest tool (PiqlIngest) that was modified by Piql to create conformant E-ARK eHealth1 SIPs (to v1.0) from exports of Electronic Medical Record (EMR) systems structured in a prescribed manner. The tool can also automate bespoke scripts that transform non conformant into conformant exports by mapping and renaming directory structures and by mapping metadata files.
+
+The eHealth1 SIP Creator is delivered as a self-contained zipped directory structure which contains executable code, dependencies, reference metadata schemas and sample data. The code is available from GitHub at: <https://github.com/E-ARK-Software/piql_ingest>. The contents of the SIP Creator package are shown in <<_figure_8>> and the GUI is shown in <<_figure_9>>.
+
+[[_figure_8]]
+.Figure 8: Piql SIP Creator Contents
+image::fig_8_piql_sip_creator_package.svg[]
+
+[[_figure_9]]
+.Figure 9: Piql SIP Creator Window
+image::fig_9_piql_sip_creator_window.svg[]
+
+==== Descriptive Metadata
+
+The eHealth1 CITS Specification requires that Patient Administrative Information must be included in the information package at the root level and that Patient Clinical Information should be included within each Patient Medical Record.The FHIR Patient and Condition resources are recommended but not mandated and the SIP Creator has been configured to use these schemas as standard. At a minimum the Patient Administrative Information should be a simple Patient manifest with Patient names and references to unque identifiers.
+
+eHealth1 SIPs should include all necessary xml schemas and the SIP Creator has been profiled to include schemas for METS, METS extensions, xlink, xml and the fhir base, Patient and condition schemas.
+
+==== Extracting Patient Records from EMR Systems
+
+It is assumed that with the skills of a local DBA and basic scripting skills that organisations will be able to:
+
+* Extract Patient administrative metadata together with unique Patient IDs and save to an xml file which will comply to either: the fhir-Patient resource, or a local xml schema. This can be for multiple Patients for each submission.
+* Extract Patient medical record information (folders, documents, files) as separate Patient records each organised according to one of the case structures as described in the eHealth1 specification.
+* Extract minimum viable Patient case clinical data that conforms to a recognised vocabulary (such as ICD), is linked to Patient cases in one of the above structures, is saved to xml files that comply with either: fhir-condition resource, any other fhir clinical resource, or to a local xml schema. There should be references for each record to the relevant Patient cases.
+
+Patient ID and Case IDs should be included in the Case folder names.
+
+==== Using the SIP Creator
+
+Submission packages are ingested into the tool by dragging and dropping from the top level folder of the submission.
+The tool presents a metadata editing template with four tabs as follows:
+
+* Software Version – this is pre-filled
+* Submission Agreements
+* Path or URL to submission agreement
+* An identifier or reference code for the submission agreement
+* Path or URL to the previous submission agreement
+* An identifier or reference code for the previous submission agreement
+* Agents
+** Creator organization name
+** Creator organization identifier
+** Archive organization name
+** Archive organization identifier
+** Preservation organization name
+** Preservation organization identifier
+** Submitter name (individual)
+** Submitter details (e.g. email address)
+* Metadata schemas
+** Patient personal information schema name 
+** Path or URL to Patient personal information schema
+** Patient clinical information schema name 
+** Patient clinical information schema location
+  
+The output of the process is placed in the /outputs folder of the package as seen in <<_figure_10>>.
+
+[[_figure_10]]
+.Figure 10: SIP in output folder
+image::fig_10_piql_sip_in_output_folder.svg[]
+

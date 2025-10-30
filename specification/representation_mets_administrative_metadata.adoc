@@ -1,4 +1,4 @@
-= Representation METS administrative metadata section (element amdSec)
+== Representation METS administrative metadata section (element amdSec)
 
 The administrative metadata section contains four sub-sections, each used to record different types of metadata for package content:
 

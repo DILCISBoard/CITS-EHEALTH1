@@ -1,0 +1,34 @@
+:imagesdir: figs
+
+== II Revision History
+
+== Revision History
+[cols="1,1,2,2,4", options="header"]
+|===
+| Revision | Date | Authors | Org | Description 
+
+| v1.0.0   
+| 31.08.2021 
+| Stephen Mackey 
+| piql AS     
+| Published  
+
+| v2.0.0   
+| 17.05.2024 
+| Stephen Mackey 
+| Penwern Limited 
+| First major revision to amend structure of aggregations for compliance with CSIP and  correct identified errors 
+
+| v2.0.1   
+| 13.12.2024
+| Stephen Mackey 
+| Penwern Limited 
+| Minor revision for METS profile corrections, to convert  specification and guideline text to markdown, widening the scope of the specification to include live patients, providing further  descriptions of standards in guideline and add example SIP.
+
+| v2.0.2   
+| 15.10.2025
+| Stephen Mackey 
+| Penwern Limited 
+| Minor revision to align METS Header Agent element with SIP revision, METS profile corrections and convert specification and guideline text to AsciiDocs.
+|===  
+
