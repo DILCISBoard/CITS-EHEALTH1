@@ -24,13 +24,17 @@ Standard changes between versions, e.g. version number and release date.
 
 Version 2.0.2
 -------------
-October xx, 2025
+December xx, 2025
 
 ### Major
 No changes
 
 ### Minor
-- Version 2.0.1
+
+### Administrative
+- Conversion to Asciidocs publication process
+
+Version 2.0.1
 -------------
 December 23rd, 2024
 
